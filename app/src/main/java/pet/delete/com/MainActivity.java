@@ -61,26 +61,56 @@ public class MainActivity extends AppCompatActivity {
     //刪除firebase資料
     public void buttonDelete(View v)
     {
-        //String key=myRef.child("notes").push().getKey();
-       // myRef.child("notes").child(key).child("2018-02-28").removeValue();
+        //        DatabaseReference drArtist = FirebaseDatabase.getInstance().getReference("notes").child(artistId);
+//        drArtist.removeValue();
+//        String key=myRef.child("notes").push().getKey();
+//        myRef.child("notes").child(artistId).removeValue();
 
         list=new ArrayList<>();
         //在這個子節點 notes 設定監聽 只要資料有變就會執行 ValueEventListener 這物件
         //這叫CALLBACK
         myRef.child("notes").addValueEventListener(new ValueEventListener() {
+            PetData note;
+
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("hello-->", "" );
+
                 //  dataSnapshot ，取得FIREBASE 裡 notes 節點裡全部內容
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                     //FIREBASE 裡取出來的資料
-                    PetData note = noteDataSnapshot.getValue(PetData.class);
+                    note = noteDataSnapshot.getValue(PetData.class);
+                    String key = noteDataSnapshot.getKey();
+                    Log.d("ID",key);
+                    String fbdate =note.getdate();
+                    Log.d("date",fbdate);
+                    if(putPetdate.equals(fbdate))
+                    {
+                        myRef.child("notes").child(key).removeValue();
+                    }
+
                     //OK  這邊可以接
                     list.add(note);
                     Log.d("PDAlistsize-->", "" + list.size());
 
                 }
+                for(int i=0; i<list.size();i++){
+                    String date = list.get(i).getdate();
+                    Log.d("date--",date);
+                    String petName = list.get(i).getPetName();
+                    Log.d("petName--",petName);
+                    //String key =  myRef.getKey();
+                    //Log.d("key--",list.get(i));
+                }
+
+
+
+
+
 
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
