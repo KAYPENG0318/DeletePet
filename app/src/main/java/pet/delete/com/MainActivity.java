@@ -45,18 +45,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //上傳firebase
-    public void buttonSave(View v)
-    {
-
-        String key=myRef.child("notes").push().getKey();
-        PetData user = new PetData (putPetname,putPetdate);
-        //這行是跟據路徑  送到FIREBASE 上
-        myRef.child("notes").child(key).setValue(user);
-
-
-
-        Toast.makeText(MainActivity.this,"已執行",Toast.LENGTH_SHORT).show();
-    }
+//    public void buttonSave(View v)
+//    {
+//
+//        String key=myRef.child("notes").push().getKey();
+//        PetData user = new PetData (putPetname,putPetdate);
+//        //這行是跟據路徑  送到FIREBASE 上
+//        myRef.child("notes").child(key).setValue(user);
+//
+//
+//
+//        Toast.makeText(MainActivity.this,"已執行",Toast.LENGTH_SHORT).show();
+//    }
 
     //刪除firebase資料
     public void buttonDelete(View v)
@@ -85,7 +85,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("ID",key);
                     String fbdate =note.getdate();
                     Log.d("date",fbdate);
-                    if(putPetdate.equals(fbdate))
+
+                    int result = putPetdate.compareTo(fbdate);
+                    if(result >= 0)
+                    //if(putPetdate.equals(fbdate))
                     {
                         myRef.child("notes").child(key).removeValue();
                     }
