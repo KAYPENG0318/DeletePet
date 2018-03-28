@@ -1,10 +1,10 @@
 package pet.delete.com;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import pet.delete.com.deletepet.R;
+import pet.delete.com.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     TextView txtpetname;
-    TextView txtdate;
+   // TextView txtdate;
+   EditText txtdate;
     String putPetname;
     String putPetdate;
 
@@ -39,33 +40,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         txtpetname = (TextView)findViewById(R.id.petName);
-        txtdate = (TextView)findViewById(R.id.date);
+        //txtdate = (TextView)findViewById(R.id.Exdate);
         putPetname = txtpetname.getText().toString();
-        putPetdate = txtdate.getText().toString();
+
+//        txtdate = (EditText)findViewById(R.id.date);
+//        putPetdate = txtdate.getText().toString();
 
     }
-    //上傳firebase
-//    public void buttonSave(View v)
-//    {
-//
-//        String key=myRef.child("notes").push().getKey();
-//        PetData user = new PetData (putPetname,putPetdate);
-//        //這行是跟據路徑  送到FIREBASE 上
-//        myRef.child("notes").child(key).setValue(user);
-//
-//
-//
-//        Toast.makeText(MainActivity.this,"已執行",Toast.LENGTH_SHORT).show();
-//    }
+
 
     //刪除firebase資料
     public void buttonDelete(View v)
     {
-        //        DatabaseReference drArtist = FirebaseDatabase.getInstance().getReference("notes").child(artistId);
-//        drArtist.removeValue();
-//        String key=myRef.child("notes").push().getKey();
-//        myRef.child("notes").child(artistId).removeValue();
 
+        txtdate = (EditText)findViewById(R.id.date);
+        putPetdate = txtdate.getText().toString();
         list=new ArrayList<>();
         //在這個子節點 notes 設定監聽 只要資料有變就會執行 ValueEventListener 這物件
         //這叫CALLBACK
