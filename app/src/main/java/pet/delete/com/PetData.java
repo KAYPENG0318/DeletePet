@@ -8,13 +8,15 @@ public class PetData {
 
     private   String petName;
     private String date;
+    private  String uri;
     public PetData(){
 
     }
 
-    public PetData(String petName, String date){
+    public PetData(String petName, String date,String uri){
         this.petName = petName;
         this.date = date;
+        this.uri=uri;
     }
     public String getPetName(){
         return petName;
@@ -29,5 +31,11 @@ public class PetData {
         this.date = date;
     }
 
+    public String getUri() {
+        return uri;
+    }
 
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
 }
