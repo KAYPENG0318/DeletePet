@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
 //        txtdate = (EditText)findViewById(R.id.date);
 
-
-
         // StorageReference imagesRef = storageRef.child("images");
         //String name = imagesRef.getName();
 
@@ -77,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         list=new ArrayList<>();
 
 
-
         //在這個子節點 notes 設定監聽 只要資料有變就會執行 ValueEventListener 這物件
         //這叫CALLBACK
         myRef.child("notes").addValueEventListener(new ValueEventListener() {
@@ -86,25 +83,24 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("hello-->", "" );
+                //Log.d("hello-->", "" );
 
                 //  dataSnapshot ，取得FIREBASE 裡 notes 節點裡全部內容
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                     //FIREBASE 裡取出來的資料
                     note = noteDataSnapshot.getValue(PetData.class);
                     String key = noteDataSnapshot.getKey();
-                    Log.d("ID",key);
+                    //Log.d("ID",key);
 
                     String fbdate =note.getdate();
-                    Log.d("date",fbdate);
+                    //Log.d("date",fbdate);
 
 
                     uri =note.getUri();
-                    Log.d("uri",uri);
+                    //Log.d("uri",uri);
                     //stroagepic =Uri.parse(uri);
 
                     //取出uri
-
 
                     //KEY
                     //取到 images
@@ -116,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 //                    String path = storageRef.getPath();
 //                    Log.d("path",path);
 
-
                     int result = putPetdate.compareTo(fbdate);
                     if(result >= 0)
                     //if(putPetdate.equals(fbdate))
@@ -124,28 +119,28 @@ public class MainActivity extends AppCompatActivity {
 
                         //刪除Firebase那筆資料 這筆key刪掉
                         myRef.child("notes").child(key).removeValue();
+
                         Delete(uri);
 
                         //應該是這裡要刪stroage
                         //TEST ERROR
                         //uri="gs://petfirebaseproject-32779.appspot.com/image/1522771685593";
 
-
                     }
 
                     //OK  這邊可以接
-                    list.add(note);
-                    Log.d("PDAlistsize-->", "" + list.size());
+//                    list.add(note);
+//                    Log.d("PDAlistsize-->", "" + list.size());
 
                 }
-                for(int i=0; i<list.size();i++){
-                    String date = list.get(i).getdate();
-                    Log.d("date--",date);
-                    String petName = list.get(i).getPetName();
-                    Log.d("petName--",petName);
-                    //String key =  myRef.getKey();
-                    //Log.d("key--",list.get(i));
-                }
+//                for(int i=0; i<list.size();i++){
+//                    String date = list.get(i).getdate();
+//                    Log.d("date--",date);
+//                    String petName = list.get(i).getPetName();
+//                    Log.d("petName--",petName);
+//                    //String key =  myRef.getKey();
+//                    //Log.d("key--",list.get(i));
+//                }
 
             }
 
@@ -211,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    }
+   }
 
 
 
